@@ -6,29 +6,28 @@
 /*   By: majrou <majrou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:45:04 by majrou            #+#    #+#             */
-/*   Updated: 2023/02/17 23:01:49 by majrou           ###   ########.fr       */
+/*   Updated: 2023/02/20 00:54:01 by majrou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include "get_next_line.h"
 
-int	ft_strlen(char *str )
+size_t	ft_strlen(const char *str)
 {
-	int	l;
+	int	len;
 
-	l = 0;
+	len = 0;
 	if (!str)
-		return (NULL);
-	while (str[l] != '\0')
+		return (0);
+	while (str[len] != '\0')
 	{
-		l++;
+		len++;
 	}
-	return (l);
+	return (len);
 }
 
-char	*my_read( static char	*save)
+char	*my_read(int fd, char *save)
 {
-	int		fd;
 	char	*ptr;
 	int		i;
 
@@ -38,7 +37,8 @@ char	*my_read( static char	*save)
 	i = 1;
 	while (i > 0)
 	{
-		i = read(fd, ptr, BUFFER_SIZE + 1);
+		i = read(fd, ptr, BUFFER_SIZE);
+		ptr[i] = '\0';
 		if (i == -1)
 			break ;
 		save = ft_strjoin(save, ptr);
@@ -49,28 +49,51 @@ char	*my_read( static char	*save)
 	return (save);
 }
 
-char	get_line(static char *s)
+char	*get_line(char *save)
 {
-	char	*book;
-	while (s++ != '\0')
-	{
-		book = my_read(s);
-	}
-	return (book);
+	int		i;
+	char	*line;
+
+	i = 0;
+	while (save[i] != '\n' && save[i])
+		i++;
+	line = ft_substr(save, 0, i);
+	return (line);
+}
+
+char	*sub(char *save)
+{
+	char	*sub;
+	int		i;
+
+	i = 0;
+	while (save[i] != '\n' && save[i])
+		i++;
+	sub = ft_substr(save, i + 1, ft_strlen(save) - i - 1);
+	free(save);
+	return (sub);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buff;
-	char	*line;
-	if(fd < 0)
-		retune(NULL);	
-	buff = my_read();
-	retune ();
+	static char	*str;
+	char		*line;
+
+	str = my_read(fd, str);
+	if (!str)
+		return (NULL);
+	line = get_line(str);
+	str = sub(str);
+	return (line);
 }
 int main()
 {
-	int fd;
-	fd = open("test.txt", O_RDONLY | O_WRONLY | O_CREAT);
-	get_next_line(fd);
+	int fd = open("majrou.txt", O_RDONLY);
+
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
 }

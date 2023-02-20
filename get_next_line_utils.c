@@ -6,11 +6,11 @@
 /*   By: majrou <majrou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:45:08 by majrou            #+#    #+#             */
-/*   Updated: 2023/02/17 19:55:13 by majrou           ###   ########.fr       */
+/*   Updated: 2023/02/19 19:46:32 by majrou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <"get_next_line.h">
+#include "get_next_line.h"
 
 char	*ft_strdup(const char *str)
 {
@@ -27,7 +27,6 @@ char	*ft_strdup(const char *str)
 		i++;
 	}
 	s[i] = '\0';
-	free(s);
 	return (s);
 }
 
@@ -58,14 +57,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	str = (char *)malloc(len +1);
+	i = 0;
 	while (i < len && start < ft_strlen (s))
 	{
 		str[i] = s[start];
 		start++;
 		i++;
 	}
-	str[i] = "\0";
-	free(str);
+	str[i] = '\0';
 	return (str);
 }
 
@@ -83,7 +82,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_memcpy(str, s1, ft_strlen(s1));
 	ft_memcpy(str + ft_strlen(s1), s2, ft_strlen(s2));
 	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
-	free(str);
+	free((char *)s1);
 	return (str);
 }
 
