@@ -6,7 +6,7 @@
 /*   By: majrou <majrou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:45:08 by majrou            #+#    #+#             */
-/*   Updated: 2023/02/19 19:46:32 by majrou           ###   ########.fr       */
+/*   Updated: 2023/02/23 16:22:09 by majrou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	str = (char *)malloc(len +1);
+	if(!str)
+		return(NULL);
 	i = 0;
 	while (i < len && start < ft_strlen (s))
 	{

@@ -6,7 +6,7 @@
 /*   By: majrou <majrou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:45:04 by majrou            #+#    #+#             */
-/*   Updated: 2023/02/23 01:28:29 by majrou           ###   ########.fr       */
+/*   Updated: 2023/02/23 18:12:34 by majrou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,33 @@ char	*my_read(int fd, char *save)
 	while (i > 0)
 	{
 		i = read(fd, ptr, BUFFER_SIZE);
-		if(i != -1)
+		if (i != -1)
 			ptr[i] = '\0';
 		if (i == 0)
 			break ;
-		if(i == -1)
+		if (i == -1)
 		{
 			free(save);
 			save = NULL;
-			break;
+			break ;
 		}
 		save = ft_strjoin(save, ptr);
 		if (ft_strchr(ptr, '\n'))
 			break ;
 	}
-	free (ptr);
-	//printf("|myread : save : %s|\n",save);
-	return (save);
+	return (free (ptr) | save);
 }
 
 char	*ft_line(char *save)
 {
 	int		i;
-	char	*line = NULL;
+	char	*line;
 
+	line = NULL;
 	i = 0;
-	if(!save)
-		return NULL;
-	while(save[i] && save[i] != '\n')
+	if (!save)
+		return (NULL);
+	while (save[i] && save[i] != '\n')
 		i++;
 	line = ft_substr(save, 0, i + 1);
 	return (line);
@@ -74,15 +73,15 @@ char	*ft_line(char *save)
 char	*sub(char *save)
 {
 	char	*sub;
-	size_t		i;
-	size_t len;
-	
+	size_t	i;
+	size_t	len;
+
 	sub = NULL;
 	i = 0;
 	len = ft_strlen(save);
 	while (save[i] && save[i] != '\n')
 		i++;
-	if(i < len - 1)
+	if (i < len - 1)
 		sub = ft_substr(save, i + 1, len);
 	free(save);
 	return (sub);
@@ -91,15 +90,14 @@ char	*sub(char *save)
 char	*get_next_line(int fd)
 {
 	static char	*str;
-	char		*line = NULL;
+	char		*line;
 
-	//printf("get_next : str : %s|\n", str);
+	line = NULL;
 	str = my_read(fd, str);
 	if (!str)
 		return (NULL);
 	line = ft_line(str);
 	str = sub(str);
-	//printf("line : |%s| sub : |%s|\n", line , str);
 	return (line);
 }
 /*int main()
