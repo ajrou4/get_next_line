@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majrou <majrou@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: majrou <majrou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 22:12:16 by majrou            #+#    #+#             */
-/*   Updated: 2023/02/24 01:32:50 by majrou           ###   ########.fr       */
+/*   Created: 2023/02/24 01:24:44 by majrou            #+#    #+#             */
+/*   Updated: 2023/02/24 01:37:34 by majrou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
 
+# include <limits.h>
 # include<string.h>
 # include<unistd.h>
 # include<stdlib.h>

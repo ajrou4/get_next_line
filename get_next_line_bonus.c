@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majrou <majrou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 01:45:04 by majrou            #+#    #+#             */
-/*   Updated: 2023/02/24 00:51:56 by majrou           ###   ########.fr       */
+/*   Created: 2023/02/24 01:24:53 by majrou            #+#    #+#             */
+/*   Updated: 2023/02/24 01:49:03 by majrou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -89,15 +89,15 @@ char	*sub(char *save)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[OPEN_MAX];
 	char		*line;
 
 	line = NULL;
-	str = my_read(fd, str);
-	if (!str)
+	str[fd] = my_read(fd, str[fd]);
+	if (!str[fd])
 		return (NULL);
-	line = ft_line(str);
-	str = sub(str);
+	line = ft_line(str[fd]);
+	str[fd] = sub(str[fd]);
 	return (line);
 }
 /*int main()
